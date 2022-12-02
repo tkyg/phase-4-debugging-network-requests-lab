@@ -62,12 +62,22 @@ developing your own process.
 
 - Add a new toy when the toy form is submitted
 
-  - How I debugged:
+  - How I debugged: 
+    - Got an error message: 500 (Internal Server Error)
+    - Looked at Rails server logs in the terminal and noticed a NameError
+    - Edited Toys to Toy, since we are only editing one toy with create
 
 - Update the number of likes for a toy
 
   - How I debugged:
+    - Got an error message: Uncaught (in promise) SyantaxError: Unexpected end of JSON input
+    - React shows it was coming from our fetch request as part of the promise chain, expecting the server to return a string of JSON-formatted data, however server wasn't returning anything. 
+    - So i edited my update action with if/else statement, created a custom patch route in my routes.rb, and in my toys_controller added increment_likes action. 
+    - Also added show action, and included show in my resources
 
 - Donate a toy to Goodwill (and delete it from our database)
 
   - How I debugged:
+    - Got a 404 (Not Found) ActionController::RoutingError (No route matches [DELETE])
+    - In routes.rb within resources added :destroy
+    - My toys_controller had a destroy action, no changes necessary there.
